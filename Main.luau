@@ -191,6 +191,12 @@ if game.PlaceId == 14363263080 then
 		end
 	end)
 
+	if Config.GreggScript.Enabled == true then
+		task.spawn(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/Gregg.luau"))()
+		end)
+	end
+
 	task.wait(5)
 
 	if Config.Settings.CheckForLevelUp == true then

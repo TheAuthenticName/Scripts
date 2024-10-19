@@ -18,7 +18,7 @@ local Config = {
 
 -- Checking If Script Should Run
 if Config.Global.Enabled ~= true then
-	print("Script Execution Stopped")
+	print("[SELECTOR] Script Execution Stopped")
 	return
 end
 

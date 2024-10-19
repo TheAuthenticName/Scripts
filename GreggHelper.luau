@@ -32,14 +32,15 @@ local Config = {
 	Scripts = {
 		FractureHelper = getgenv().Config.Scripts.FractureHelper,
 		Manual = getgenv().Config.Scripts.Manual,
+		Gregg = getgenv().Config.Scripts.Gregg,
 	},
 	Settings = {
-		ResetOnGregg = getgenv().Config.Settings.Gregg.ResetOnGregg, -- Will Reset When Gregg Is Killed
-		ResetInLocations = getgenv().Config.Settings.Gregg.ResetInLocations, -- Will Reset In Optimal Locations For Set Dungeons
+		ResetOnGregg = getgenv().Config.Settings.Gregg.ResetOnGregg,
+		ResetInLocations = getgenv().Config.Settings.Gregg.ResetInLocations,
 		Webhook = {
-			Enabled = getgenv().Config.Settings.Gregg.Webhook.Enabled, -- Send Gregg Updates E.g Current Materials, Materials gained And What Type Of Material
-			Ping = getgenv().Config.Settings.Gregg.Webhook.Ping, -- Pings When Webhook Is Sent (Accepted Values - everyone Or Discord UserId)
-			Url = getgenv().Config.Settings.Gregg.Webhook.Url, -- Webhook Url
+			Enabled = getgenv().Config.Settings.Gregg.Webhook.Enabled,
+			Ping = getgenv().Config.Settings.Gregg.Webhook.Ping,
+			Url = getgenv().Config.Settings.Gregg.Webhook.Url,
 		},
 	},
 }
@@ -47,6 +48,7 @@ local Config = {
 -- Functions
 local function LoadFracture()
 	if Config.Scripts.FractureHelper ~= true or Config.Scripts.Manual ~= true then
+		print("[GREGG HELPER] Loading Fracture")
 		if getgenv().IsFractureLoaded == false then
 			script_key = Config.Global.Key
 			loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
@@ -128,7 +130,7 @@ local function SendWebhook(Ping: string, Material: string, Added: string, Total:
 end
 
 if game.PlaceId == 2414851778 then
-	-- task.spawn(LoadFracture)
+	task.spawn(LoadFracture)
 
 	SaveGreggData()
 end

@@ -38,7 +38,7 @@ end
 if game.PlaceId == 2414851778 then
 	if Config.Scripts.FractureHelper == true then
 		print("Loading Fracture Module")
-		loadstring(game:HttpGet(""))
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))
 	end
 end
 
@@ -46,23 +46,24 @@ if game.PlaceId == 14363263080 then
 	if Config.Scripts.FractureHelper == true then
 		print("Loading Fracture Module")
 		task.spawn(function()
-			loadstring(game:HttpGet(""))
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))
 		end)
 	end
 
 	if Config.Scripts.Gregg == true then
 		print("Loading Gregg Module")
 		task.spawn(function()
-			loadstring(game:HttpGet(""))
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"))
 		end)
 	end
 
+	--[[
 	if Config.Scripts.Manual == true and Config.Scripts.FractureHelper == false then
 		print("Loading Manual Module")
 		task.spawn(function()
 			loadstring(game:HttpGet(""))
 		end)
-	end
+	end]]
 
 	if Config.Scripts.FractureHelper == false and Config.Scripts.Manual == false and Config.Scripts.Gregg == false then
 		LoadFracture()

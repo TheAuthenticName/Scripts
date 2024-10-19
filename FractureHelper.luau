@@ -105,19 +105,19 @@ end
 
 local function PlayerLeaving(ID: number)
 	if ID == 2414851778 then
-		print("Lobby")
+		print("[FRACTURE HELPER] Lobby")
 
 		Players.PlayerRemoving:Connect(function(plr)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
-				print("Waiting 40 Seconds")
+				print("[FRACTURE HELPER] Waiting 40 Seconds")
 
 				task.wait(40)
 
 				if Players:FindFirstChild(plr.Name) then
-					print(`{plr.Name} Has Rejoined!`)
+					print(`[FRACTURE HELPER] {plr.Name} Has Rejoined!`)
 					return
 				else
-					print("Teleporting")
+					print("[FRACTURE HELPER] Teleporting")
 
 					local Friends = Player:GetFriendsOnline()
 
@@ -137,7 +137,7 @@ local function PlayerLeaving(ID: number)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
 				task.wait(20)
 
-				print("Teleporting")
+				print("[FRACTURE HELPER] Teleporting")
 
 				local Friends = Player:GetFriendsOnline()
 
@@ -185,7 +185,7 @@ if game.PlaceId == 2414851778 then
 
 	task.spawn(function()
 		if Player.Name == Config.Settings.AltAccount then
-			print("Lobby Timer Started")
+			print("[FRACTURE HELPER] Lobby Timer Started")
 			task.wait(120)
 
 			local Friends = Player:GetFriendsOnline()
@@ -219,7 +219,7 @@ if game.PlaceId == 14363263080 then
 
 	-- If Accounts Get Stuck Mid Run
 	task.spawn(function()
-		print("Dungeon Timer Started")
+		print("[FRACTURE HELPER] Dungeon Timer Started")
 
 		if Player.Name == Config.Settings.MainAccount then
 			task.wait(360)

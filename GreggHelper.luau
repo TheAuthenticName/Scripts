@@ -130,7 +130,7 @@ local function SendWebhook(Ping: string, Material: string, Added: string, Total:
 end
 
 if game.PlaceId == 2414851778 then
-	task.spawn(LoadFracture)
+	-- task.spawn(LoadFracture)
 
 	SaveGreggData()
 end

@@ -29,6 +29,10 @@ local Config = {
 	Global = {
 		Key = getgenv().Config.Global.Key,
 	},
+	Scripts = {
+		FractureHelper = getgenv().Config.Scripts.FractureHelper,
+		Manual = getgenv().Config.Scripts.Manual,
+	},
 	Settings = {
 		ResetOnGregg = getgenv().Config.Settings.Gregg.ResetOnGregg, -- Will Reset When Gregg Is Killed
 		ResetInLocations = getgenv().Config.Settings.Gregg.ResetInLocations, -- Will Reset In Optimal Locations For Set Dungeons
@@ -42,13 +46,17 @@ local Config = {
 
 -- Functions
 local function LoadFracture()
-	if getgenv().IsFractureLoaded == false then
-		script_key = Config.Global.Key
-		loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
+	if Config.Scripts.FractureHelper ~= true or Config.Scripts.Manual ~= true then
+		if getgenv().IsFractureLoaded == false then
+			script_key = Config.Global.Key
+			loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
 
-		getgenv().IsFractureLoaded = true
+			getgenv().IsFractureLoaded = true
+		else
+			warn("[GREGG HELPER] Fracture Is Already Loaded")
+		end
 	else
-		warn("[GREGG HELPER] Fracture Is Already Loaded")
+		return
 	end
 end
 
@@ -72,7 +80,7 @@ local function ReadGreggData()
 	if isfile("Helper/Gregg.json") then
 		return HttpService:JSONDecode(readfile("Helper/Gregg.json"))
 	else
-		Player:Kick("[GREGG HELPER] No Data File Found, Please Go To Lobby!")
+		Player:Kick("No Data File Found, Please Go To Lobby!")
 		return
 	end
 end

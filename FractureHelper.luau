@@ -3,8 +3,6 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 
-print("Fracture Helper")
-
 -- Services
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
@@ -24,6 +22,11 @@ local Data
 local Config = {
 	Global = {
 		Key = getgenv().Config.Global.Key,
+	},
+	Scripts = {
+		FractureHelper = getgenv().Config.Scripts.FractureHelper,
+		Manual = getgenv().Config.Scripts.Manual,
+		Gregg = getgenv().Config.Scripts.Gregg,
 	},
 	Settings = {
 		MainAccount = getgenv().Config.Settings.FractureHelper.MainAccount,
@@ -85,6 +88,7 @@ local Levels = {
 -- Functions
 local function LoadFracture()
 	if getgenv().IsFractureLoaded == false then
+		print("[FRACTURE HELPER] Loading Fracture")
 		script_key = Config.Global.Key
 		loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
 
@@ -105,19 +109,19 @@ end
 
 local function PlayerLeaving(ID: number)
 	if ID == 2414851778 then
-		print("[FRACTURE HELPER] Lobby")
+		print("Lobby")
 
 		Players.PlayerRemoving:Connect(function(plr)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
-				print("[FRACTURE HELPER] Waiting 40 Seconds")
+				print("Waiting 40 Seconds")
 
 				task.wait(40)
 
 				if Players:FindFirstChild(plr.Name) then
-					print(`[FRACTURE HELPER] {plr.Name} Has Rejoined!`)
+					print(`{plr.Name} Has Rejoined!`)
 					return
 				else
-					print("[FRACTURE HELPER] Teleporting")
+					print("Teleporting")
 
 					local Friends = Player:GetFriendsOnline()
 
@@ -137,7 +141,7 @@ local function PlayerLeaving(ID: number)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
 				task.wait(20)
 
-				print("[FRACTURE HELPER] Teleporting")
+				print("Teleporting")
 
 				local Friends = Player:GetFriendsOnline()
 
@@ -185,7 +189,7 @@ if game.PlaceId == 2414851778 then
 
 	task.spawn(function()
 		if Player.Name == Config.Settings.AltAccount then
-			print("[FRACTURE HELPER] Lobby Timer Started")
+			print("Lobby Timer Started")
 			task.wait(120)
 
 			local Friends = Player:GetFriendsOnline()
@@ -219,7 +223,7 @@ if game.PlaceId == 14363263080 then
 
 	-- If Accounts Get Stuck Mid Run
 	task.spawn(function()
-		print("[FRACTURE HELPER] Dungeon Timer Started")
+		print("Dungeon Timer Started")
 
 		if Player.Name == Config.Settings.MainAccount then
 			task.wait(360)

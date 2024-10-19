@@ -18,20 +18,27 @@ local Config = {
 
 -- Checking If Script Should Run
 if Config.Global.Enabled ~= true then
-	print("Script Execution Stopped")
+	print("[SELECTOR] Script Execution Stopped")
 	return
 end
 
 -- Functions
-local function LoadFracture()
-	if getgenv().IsFractureLoaded == false then
-		script_key = Config.Global.Key
-		loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
+local function LoadFHelper()
+	task.spawn(function()
+		loadstring(
+			game:HttpGet(
+				"https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"
+			)
+		)()
+	end)
+end
 
-		getgenv().IsFractureLoaded = true
-	else
-		warn("[SELECTOR] Fracture Is Already Loaded")
-	end
+local function LoadGHelper()
+	task.spawn(function()
+		loadstring(
+			game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau")
+		)()
+	end)
 end
 
 -- RunTime
@@ -40,48 +47,24 @@ getgenv().IsFractureLoaded = false
 if game.PlaceId == 2414851778 then
 	if Config.Scripts.FractureHelper == true then
 		print("[SELECTOR] Loading Fracture Module")
-		task.spawn(function()
-			loadstring(
-				game:HttpGet(
-					"https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"
-				)
-			)()
-		end)
+		LoadFHelper()
 	end
 
 	if Config.Scripts.Gregg == true then
 		print("[SELECTOR] Loading Gregg Module")
-		task.spawn(function()
-			loadstring(
-				game:HttpGet(
-					"https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"
-				)
-			)()
-		end)
+		LoadGHelper()
 	end
 end
 
 if game.PlaceId == 14363263080 then
 	if Config.Scripts.FractureHelper == true then
 		print("[SELECTOR] Loading Fracture Module")
-		task.spawn(function()
-			loadstring(
-				game:HttpGet(
-					"https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"
-				)
-			)()
-		end)
+		LoadFHelper()
 	end
 
 	if Config.Scripts.Gregg == true then
 		print("[SELECTOR] Loading Gregg Module")
-		task.spawn(function()
-			loadstring(
-				game:HttpGet(
-					"https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"
-				)
-			)()
-		end)
+		LoadGHelper()
 	end
 
 	--[[
@@ -91,9 +74,4 @@ if game.PlaceId == 14363263080 then
 			loadstring(game:HttpGet(""))
 		end)
 	end]]
-
-	if Config.Scripts.FractureHelper == false and Config.Scripts.Manual == false and Config.Scripts.Gregg == false then
-		print("[SELECTOR] Loading Fracture Script")
-		LoadFracture()
-	end
 end

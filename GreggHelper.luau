@@ -72,7 +72,7 @@ local function ReadGreggData()
 	if isfile("Helper/Gregg.json") then
 		return HttpService:JSONDecode(readfile("Helper/Gregg.json"))
 	else
-		Player:Kick("No Data File Found, Please Go To Lobby!")
+		Player:Kick("[GREGG HELPER] No Data File Found, Please Go To Lobby!")
 		return
 	end
 end

@@ -38,21 +38,21 @@ end
 -- RunTime
 if game.PlaceId == 2414851778 then
 	if Config.Scripts.FractureHelper == true then
-		print("Loading Fracture Module")
+		print("[SELECTOR] Loading Fracture Module")
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))()
 	end
 end
 
 if game.PlaceId == 14363263080 then
 	if Config.Scripts.FractureHelper == true then
-		print("Loading Fracture Module")
+		print("[SELECTOR] Loading Fracture Module")
 		task.spawn(function()
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))()
 		end)
 	end
 
 	if Config.Scripts.Gregg == true then
-		print("Loading Gregg Module")
+		print("[SELECTOR] Loading Gregg Module")
 		task.spawn(function()
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"))()
 		end)
@@ -60,7 +60,7 @@ if game.PlaceId == 14363263080 then
 
 	--[[
 	if Config.Scripts.Manual == true and Config.Scripts.FractureHelper == false then
-		print("Loading Manual Module")
+		print("[SELECTOR] Loading Manual Module")
 		task.spawn(function()
 			loadstring(game:HttpGet(""))
 		end)

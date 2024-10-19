@@ -3,6 +3,8 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 
+print("Fracture Helper")
+
 -- Services
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")

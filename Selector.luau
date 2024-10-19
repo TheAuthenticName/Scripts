@@ -18,7 +18,7 @@ local Config = {
 
 -- Checking If Script Should Run
 if Config.Global.Enabled ~= true then
-	print("[SELECTOR] Script Execution Stopped")
+	print("Script Execution Stopped")
 	return
 end
 
@@ -34,8 +34,9 @@ local function LoadFracture()
 	end
 end
 
-
 -- RunTime
+getgenv().IsFractureLoaded = false
+
 if game.PlaceId == 2414851778 then
 	if Config.Scripts.FractureHelper == true then
 		print("[SELECTOR] Loading Fracture Module")

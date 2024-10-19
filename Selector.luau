@@ -30,9 +30,10 @@ local function LoadFracture()
 
 		getgenv().IsFractureLoaded = true
 	else
-		warn("Fracture Is Already Loaded")
+		warn("[SELECTOR] Fracture Is Already Loaded")
 	end
 end
+
 
 -- RunTime
 if game.PlaceId == 2414851778 then

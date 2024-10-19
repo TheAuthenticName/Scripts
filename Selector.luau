@@ -40,7 +40,16 @@ getgenv().IsFractureLoaded = false
 if game.PlaceId == 2414851778 then
 	if Config.Scripts.FractureHelper == true then
 		print("[SELECTOR] Loading Fracture Module")
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))()
+		task.spawn(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))()
+		end)
+	end
+
+	if Config.Scripts.Gregg == true then
+		print("[SELECTOR] Loading Gregg Module")
+		task.spawn(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"))()
+		end)
 	end
 end
 

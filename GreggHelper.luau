@@ -46,6 +46,9 @@ local function SaveGreggData()
 	repeat
 		task.wait()
 	until MaterialGui["Astral Amethyst"].TextLabel.Text ~= 888
+		or MaterialGui["Gold Bar"].TextLabel.Text ~= 888
+		or MaterialGui["Obsidian Chunk"].TextLabel.Text ~= 888
+		or MaterialGui["Warforged Metal"].TextLabel.Text ~= 888
 
 	task.wait(1)
 

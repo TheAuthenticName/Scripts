@@ -221,6 +221,8 @@ if game.PlaceId == 14363263080 then
 		if Player.Name == Config.Settings.MainAccount then
 			local Level = Players:WaitForChild(Config.Settings.MainAccount):WaitForChild("leaderstats").Level.Value
 
+			print("Checking")
+
 			for i = 5, 210, 5 do
 				if Level >= i and Level <= i + 4 and Data[tostring(i)] == false then
 					Levels[tostring(i)] = true

@@ -119,50 +119,50 @@ if game.PlaceId == 14363263080 then
 	if Config.Settings.ResetOnGregg == true then
 		print("[GREGG HELPER]: Resetting On Gregg")
 
-		game.Workspace.DescendantRemoving:Connect(function(Mob)
-			if Mob.Name == "Gregg" and Mob.Humanoid.Health <= 0 then
-				ResetPlayer()
-			end
-		end)
+		if DungeonName.Value ~= "Yokai Peak" then
+			game.Workspace.DescendantRemoving:Connect(function(Mob)
+				if Mob.Name == "Gregg" and Mob.Humanoid.Health <= 0 then
+					ResetPlayer()
+				end
+			end)
+		end
 	end
 
 	if Config.Settings.Webhook.Enabled == true then
 		print("[GREGG HELPER]: Sending Webhook")
 
-		if DungeonName.Value ~= "Yokai Peak" then
-			Workspace.DescendantRemoving:Connect(function(Mob)
-				if Mob.Name == "Gregg" and Mob.Humanoid.Health <= 0 then
-					local GreggGui = PlayerGui.CrossDungeonGregg.greggRewards:WaitForChild("Material")
-					local MaterialsAdded = GreggGui:WaitForChild("TextLabel").Text
-					local MaterialImage = GreggGui:WaitForChild("ImageLabel").Image
+		Workspace.DescendantRemoving:Connect(function(Mob)
+			if Mob.Name == "Gregg" and Mob.Humanoid.Health <= 0 then
+				local GreggGui = PlayerGui.CrossDungeonGregg.greggRewards:WaitForChild("Material")
+				local MaterialsAdded = GreggGui:WaitForChild("TextLabel").Text
+				local MaterialImage = GreggGui:WaitForChild("ImageLabel").Image
 
-					local MaterialType, TotalAmount
+				local MaterialType, TotalAmount
 
-					if MaterialImage == "rbxassetid://17166874566" then
-						MaterialType = "Warforged Metal"
-					elseif MaterialImage == "rbxassetid://17166875877" then
-						MaterialType = "Obsidian Chunk"
-					elseif MaterialImage == "rbxassetid://17166876539" then
-						MaterialType = "Gold Bar"
-					elseif MaterialImage == "rbxassetid://17109342015" then
-						MaterialType = "Astral Amethyst"
-					end
-
-					for i, v in Data do
-						if i == MaterialType then
-							TotalAmount = v
-						end
-					end
-
-					local Path = Materials[MaterialType] + tonumber(string.sub(MaterialsAdded, 2))
-					local Encoded = HttpService:JSONEncode(Path)
-
-					writefile("Helper/Gregg.json", Encoded)
-
-					SendGreggWebhook(Config.Settings.Webhook.Ping, MaterialType, MaterialsAdded, TotalAmount)
+				if MaterialImage == "rbxassetid://17166874566" then
+					MaterialType = "Warforged Metal"
+				elseif MaterialImage == "rbxassetid://17166875877" then
+					MaterialType = "Obsidian Chunk"
+				elseif MaterialImage == "rbxassetid://17166876539" then
+					MaterialType = "Gold Bar"
+				elseif MaterialImage == "rbxassetid://17109342015" then
+					MaterialType = "Astral Amethyst"
 				end
-			end)
-		end
+
+				for i, v in Data do
+					if i == MaterialType then
+						TotalAmount = v
+					end
+				end
+
+				local Path = Materials[MaterialType] + tonumber(string.sub(MaterialsAdded, 2))
+				local Encoded = HttpService:JSONEncode(Path)
+
+				writefile("Helper/Gregg.json", Encoded)
+
+				SendGreggWebhook(Config.Settings.Webhook.Ping, MaterialType, MaterialsAdded, TotalAmount)
+			end
+		end)
 	end
 
 	if Config.Settings.ResetInLocations == true then

@@ -159,10 +159,10 @@ if game.PlaceId == 14363263080 then
 					end
 				end
 
-				local Path = Materials[MaterialType] + tonumber(string.sub(MaterialsAdded, 2))
+				local Path = Materials[MaterialType] + tonumber(MaterialsAdded)
 				local Encoded = HttpService:JSONEncode(Path)
 
-				TotalAmount += tonumber(string.sub(MaterialsAdded, 2))
+				TotalAmount += tonumber(MaterialsAdded)
 
 				writefile("Helper/Gregg.json", Encoded)
 

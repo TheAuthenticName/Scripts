@@ -13,7 +13,7 @@ local function LoadFractureHelper()
 end
 
 local function LoadGreggHelper()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"))
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau"))()
 end
 
 -- RunTime

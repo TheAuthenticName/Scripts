@@ -9,7 +9,7 @@ local Config = {
 
 -- Functions
 local function LoadFractureHelper()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))()
 end
 
 local function LoadGreggHelper()

@@ -1,8 +1,3 @@
--- Yield Game
-if not game:IsLoaded() then
-	game.Loaded:Wait()
-end
-
 -- Services
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
@@ -18,24 +13,19 @@ local Player = Players.LocalPlayer
 -- Misc Variables
 local Data
 
--- Config Variables
+-- Config
 local Config = {
 	Global = {
 		Key = getgenv().Config.Global.Key,
 	},
-	Scripts = {
-		FractureHelper = getgenv().Config.Scripts.FractureHelper,
-		Manual = getgenv().Config.Scripts.Manual,
-		Gregg = getgenv().Config.Scripts.Gregg,
-	},
 	Settings = {
-		MainAccount = getgenv().Config.Settings.FractureHelper.MainAccount,
-		AltAccount = getgenv().Config.Settings.FractureHelper.AltAccount,
-		CheckForLevelUp = getgenv().Config.Settings.FractureHelper.CheckForLevelUp,
+		MainAccount = getgenv().Config.FractureHelper.MainAccount, -- Account Getting Carried
+		AltAccount = getgenv().Config.FractureHelper.AltAccount, -- Account Carrying
+		CheckForLevelUp = getgenv().Config.FractureHelper.CheckForLevelUp, -- Will Return Every Level On The Main Account, Carry Account Will Join If Leaves
 		Webhook = {
-			Enabled = getgenv().Config.Settings.FractureHelper.Webhook.Enabled,
-			Ping = getgenv().Config.Settings.FractureHelper.Webhook.Ping,
-			Url = getgenv().Config.Settings.FractureHelper.Webhook.Url,
+			Enabled = getgenv().Config.FractureHelper.Webhook.Enabled,
+			Ping = getgenv().Config.FractureHelper.Webhook.Ping, -- Pings When Webhook Is Sent (Accepted Values - everyone Or Discord UserId)
+			Url = getgenv().Config.FractureHelper.Webhook.Url, -- Webhook Url
 		},
 	},
 }
@@ -87,15 +77,10 @@ local Levels = {
 
 -- Functions
 local function LoadFracture()
-	if getgenv().IsFractureLoaded == false then
-		print("[FRACTURE HELPER] Loading Fracture")
-		script_key = Config.Global.Key
-		loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
+	print("[FRACTURE HELPER]: Loading Main Fracture Script")
 
-		getgenv().IsFractureLoaded = true
-	else
-		warn("[FRACTURE HELPER] Fracture Is Already Loaded")
-	end
+	script_key = Config.Global.Key
+	loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/24ae860d718d926527e0d2ee8fec1611.lua"))()
 end
 
 local function SaveLevelData()
@@ -109,19 +94,19 @@ end
 
 local function PlayerLeaving(ID: number)
 	if ID == 2414851778 then
-		print("Lobby")
+		print("[FRACTURE HELPER]: Lobby")
 
 		Players.PlayerRemoving:Connect(function(plr)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
-				print("Waiting 40 Seconds")
+				print("[FRACTURE HELPER]: Waiting 40 Seconds")
 
 				task.wait(40)
 
 				if Players:FindFirstChild(plr.Name) then
-					print(`{plr.Name} Has Rejoined!`)
+					print(`[FRACTURE HELPER]: {plr.Name} Has Rejoined!`)
 					return
 				else
-					print("Teleporting")
+					print("[FRACTURE HELPER]: Teleporting")
 
 					local Friends = Player:GetFriendsOnline()
 
@@ -137,11 +122,13 @@ local function PlayerLeaving(ID: number)
 			end
 		end)
 	elseif ID == 14363263080 then
+		print("[FRACTURE HELPER]: Dungeon")
+
 		Players.PlayerRemoving:Connect(function(plr)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
 				task.wait(20)
 
-				print("Teleporting")
+				print("[FRACTURE HELPER]: Teleporting")
 
 				local Friends = Player:GetFriendsOnline()
 
@@ -158,7 +145,7 @@ local function PlayerLeaving(ID: number)
 	end
 end
 
-local function SendWebhook(Ping: string, Level)
+local function SendLevelWebhook(Ping: string, Level)
 	if Ping == "everyone" then
 		Ping = "@eveyone"
 	elseif Ping ~= "" then
@@ -179,7 +166,6 @@ local function SendWebhook(Ping: string, Level)
 	MyWebhook.sendMessage()
 end
 
--- RunTime
 if game.PlaceId == 2414851778 then
 	if not isfile("Helper/Levels.json") then
 		SaveLevelData()
@@ -189,7 +175,7 @@ if game.PlaceId == 2414851778 then
 
 	task.spawn(function()
 		if Player.Name == Config.Settings.AltAccount then
-			print("Lobby Timer Started")
+			print("[FRACTURE HELPER]: Lobby Timer Started")
 			task.wait(120)
 
 			local Friends = Player:GetFriendsOnline()
@@ -223,9 +209,9 @@ if game.PlaceId == 14363263080 then
 
 	-- If Accounts Get Stuck Mid Run
 	task.spawn(function()
-		print("Dungeon Timer Started")
-
 		if Player.Name == Config.Settings.MainAccount then
+			print("[FRACTURE HELPER]: Dungeon Timer Started")
+
 			task.wait(360)
 			TeleportService:Teleport(2414851778, Player)
 		end
@@ -239,7 +225,7 @@ if game.PlaceId == 14363263080 then
 				if Level >= i and Level <= i + 4 and Data[tostring(i)] == false then
 					Levels[tostring(i)] = true
 					if Config.Settings.Webhook.Enabled == true then
-						SendWebhook(Config.Settings.Webhook.Ping, i)
+						SendLevelWebhook(Config.Settings.Webhook.Ping, i)
 					end
 					SaveLevelData()
 

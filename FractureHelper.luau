@@ -74,6 +74,10 @@ local Levels = {
 	["210"] = false,
 	["215"] = false,
 	["220"] = false,
+	["225"] = false,
+	["230"] = false,
+	["235"] = false,
+	["240"] = false,
 }
 
 -- Functions
@@ -162,7 +166,10 @@ local function SendLevelWebhook(Ping: string, Level)
 	local EmbedInformation =
 		MyWebhook.addEmbed("Level Up", tonumber(string.format("0x%X", math.random(0x000000, 0xFFFFFF))), "")
 
-	EmbedInformation.addField("Player Information", "```Name: " .. Player.Name .. "\n" .. "New Level" .. Level .. "```")
+	EmbedInformation.addField(
+		"Player Information",
+		"```Name: " .. Player.Name .. "\n" .. "New Level: " .. Level .. "```"
+	)
 
 	MyWebhook.sendMessage()
 end
@@ -222,9 +229,7 @@ if game.PlaceId == 14363263080 then
 		if Player.Name == Config.Settings.MainAccount then
 			local Level = Players:WaitForChild(Config.Settings.MainAccount):WaitForChild("leaderstats").Level.Value
 
-			print("Checking")
-
-			for i = 5, 220, 5 do
+			for i = 5, 240, 5 do
 				if Level >= i and Level <= i + 4 and Data[tostring(i)] == false then
 					Levels[tostring(i)] = true
 					if Config.Settings.Webhook.Enabled == true then

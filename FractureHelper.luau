@@ -73,6 +73,7 @@ local Levels = {
 	["205"] = false,
 	["210"] = false,
 	["215"] = false,
+	["220] = false,
 }
 
 -- Functions
@@ -223,7 +224,7 @@ if game.PlaceId == 14363263080 then
 
 			print("Checking")
 
-			for i = 5, 210, 5 do
+			for i = 5, 220, 5 do
 				if Level >= i and Level <= i + 4 and Data[tostring(i)] == false then
 					Levels[tostring(i)] = true
 					if Config.Settings.Webhook.Enabled == true then

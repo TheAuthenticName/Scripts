@@ -133,7 +133,7 @@ if game.PlaceId == 14363263080 then
 		print("[GREGG HELPER]: Sending Webhook")
 
 		Workspace.DescendantRemoving:Connect(function(Mob)
-			if Mob.Name == "Gregg" and Mob.Humanoid.Health <= 0 then
+			if Mob.Name == "Gregg" then
 				local GreggGui = PlayerGui.CrossDungeonGregg.greggRewards:WaitForChild("Material")
 				local MaterialsAdded = GreggGui:WaitForChild("TextLabel").Text
 				local MaterialImage = GreggGui:WaitForChild("ImageLabel").Image

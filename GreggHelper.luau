@@ -49,9 +49,10 @@ local function SaveGreggData()
 
 	task.wait(1)
 
-	for index, value in Materials do
-		value = MaterialGui[index].TextLabel.Text
-	end
+	Materials["Astral Amethyst"] = MaterialGui["Astral Amethyst"].TextLabel.Text
+	Materials["Gold Bar"] = MaterialGui["Gold Bar"].TextLabel.Text
+	Materials["Obsidian Chunk"] = MaterialGui["Obsidian Chunk"].TextLabel.Text
+	Materials["Warforged Metal"] = MaterialGui["Warforged Metal"].TextLabel.Text
 
 	local Encoded = HttpService:JSONEncode(Materials)
 	writefile("Helper/Gregg.json", Encoded)

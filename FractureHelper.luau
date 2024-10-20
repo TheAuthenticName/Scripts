@@ -235,9 +235,10 @@ if game.PlaceId == 14363263080 then
 					break
 				end
 			end
-			LoadFracture()
 		end
-	else
-		LoadFracture()
 	end
+
+	task.wait(5)
+
+	LoadFracture()
 end

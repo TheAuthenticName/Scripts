@@ -1,77 +1,54 @@
--- Yield Game
-if not game:IsLoaded() then
-	game.Loaded:Wait()
-end
-
 -- Config
 local Config = {
-	Global = {
-		Enabled = getgenv().Config.Global.Enabled,
-		Key = getgenv().Config.Global.Key,
-	},
 	Scripts = {
-		FractureHelper = getgenv().Config.Scripts.FractureHelper,
-		Manual = getgenv().Config.Scripts.Manual,
-		Gregg = getgenv().Config.Scripts.Gregg,
+		FractureHelper = getgenv().Config.FractureHelper.Enabled,
+		Manual = getgenv().Config.Manual.Enabled,
+		Gregg = getgenv().Config.Gregg.Enabled,
 	},
 }
 
--- Checking If Script Should Run
-if Config.Global.Enabled ~= true then
-	print("[SELECTOR] Script Execution Stopped")
-	return
-end
-
 -- Functions
-local function LoadFHelper()
-	task.spawn(function()
-		loadstring(
-			game:HttpGet(
-				"https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"
-			)
-		)()
-	end)
+local function LoadFractureHelper()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/FractureHelper.luau"))()
 end
 
-local function LoadGHelper()
-	task.spawn(function()
-		loadstring(
-			game:HttpGet("https://raw.githubusercontent.com/TheAuthenticName/Scripts/refs/heads/main/GreggHelper.luau")
-		)()
-	end)
+local function LoadGreggHelper()
+	loadstring(game:HttpGet(""))
 end
 
 -- RunTime
-getgenv().IsFractureLoaded = false
-
 if game.PlaceId == 2414851778 then
+	-- Load Fracture Helper Module
 	if Config.Scripts.FractureHelper == true then
-		print("[SELECTOR] Loading Fracture Module")
-		LoadFHelper()
+		print(`[SELECTOR]: Loading Fracture Helper`)
+		task.spawn(function()
+			LoadFractureHelper()
+		end)
 	end
 
+	-- Load Gregg Module
 	if Config.Scripts.Gregg == true then
-		print("[SELECTOR] Loading Gregg Module")
-		LoadGHelper()
+		print(`[SELECTOR]: Loading Gregg Helper`)
+		task.spawn(function()
+			LoadGreggHelper()
+		end)
 	end
 end
 
 if game.PlaceId == 14363263080 then
+	-- Load Fracture Helper Module
 	if Config.Scripts.FractureHelper == true then
-		print("[SELECTOR] Loading Fracture Module")
-		LoadFHelper()
-	end
-
-	if Config.Scripts.Gregg == true then
-		print("[SELECTOR] Loading Gregg Module")
-		LoadGHelper()
-	end
-
-	--[[
-	if Config.Scripts.Manual == true and Config.Scripts.FractureHelper == false then
-		print("[SELECTOR] Loading Manual Module")
+		print(`[SELECTOR]: Loading Fracture Helper`)
 		task.spawn(function()
-			loadstring(game:HttpGet(""))
+			LoadFractureHelper()
 		end)
-	end]]
+	end
+
+	-- Load Gregg Module
+	if Config.Scripts.Gregg == true then
+		print(`[SELECTOR]: Loading Gregg Helper`)
+		task.spawn(function()
+			LoadGreggHelper()
+		end)
+	end
 end

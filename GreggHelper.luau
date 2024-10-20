@@ -159,6 +159,8 @@ if game.PlaceId == 14363263080 then
 				local Path = Materials[MaterialType] + tonumber(string.sub(MaterialsAdded, 2))
 				local Encoded = HttpService:JSONEncode(Path)
 
+				TotalAmount += tonumber(string.sub(MaterialsAdded, 2))
+
 				writefile("Helper/Gregg.json", Encoded)
 
 				SendGreggWebhook(Config.Settings.Webhook.Ping, MaterialType, MaterialsAdded, TotalAmount)

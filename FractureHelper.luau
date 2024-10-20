@@ -73,7 +73,7 @@ local Levels = {
 	["205"] = false,
 	["210"] = false,
 	["215"] = false,
-	["220] = false,
+	["220"] = false,
 }
 
 -- Functions

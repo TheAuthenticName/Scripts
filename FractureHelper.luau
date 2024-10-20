@@ -99,7 +99,7 @@ end
 
 local function PlayerLeaving(ID: number)
 	if ID == 2414851778 then
-		print("[FRACTURE HELPER]: Lobby")
+		print("[FRACTURE HELPER]: Player Leaving Is Set To Lobby")
 
 		Players.PlayerRemoving:Connect(function(plr)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then
@@ -127,7 +127,7 @@ local function PlayerLeaving(ID: number)
 			end
 		end)
 	elseif ID == 14363263080 then
-		print("[FRACTURE HELPER]: Dungeon")
+		print("[FRACTURE HELPER]: Player Leaving Is Set To Dungeon")
 
 		Players.PlayerRemoving:Connect(function(plr)
 			if plr.Name == Config.Settings.MainAccount or plr.Name == Config.Settings.AltAccount then

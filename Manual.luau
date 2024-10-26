@@ -14,7 +14,7 @@ local Humanoid: Humanoid = Character:WaitForChild("Humanoid")
 
 -- Misc Variables
 local PlayersInGame = {}
-local MaxDistance = math.huge
+local MaxDistance = 500
 local CurrentClass
 
 -- Pathing Variables
@@ -63,7 +63,7 @@ end
 
 local function FindTarget()
 	local Closest
-	MaxDistance = math.huge
+	MaxDistance = 500
 
 	for i, target in Workspace.dungeon:GetDescendants() do
 		if target:IsA("Model") and target.Parent.Name == "enemyFolder" then
@@ -112,7 +112,11 @@ if game.PlaceId == 14363263080 then
 
 	-- Main
 	RunService.RenderStepped:Connect(function()
-		if Humanoid.Health > 0 and Workspace:FindFirstChild(MainConfig.MainAccount).Humanoid.Health > 0 then
+		if
+			Humanoid.Health > 0
+			and Player.Name ~= MainConfig.MainAccount
+			and Workspace:FindFirstChild(MainConfig.MainAccount).Humanoid.Health > 0
+		then
 			task.spawn(function()
 				local Path = PathFindingService:CreatePath({
 					AgentRadius = 3,
@@ -123,7 +127,7 @@ if game.PlaceId == 14363263080 then
 				local success, fail = pcall(function()
 					Path:ComputeAsync(
 						Character.PrimaryPart.Position,
-						Workspace:FindFirstChild(MainConfig.MainAccount).PrimaryPart
+						Workspace:FindFirstChild(MainConfig.MainAccount).PrimaryPart.Position
 					)
 				end)
 
